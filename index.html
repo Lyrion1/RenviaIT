@@ -1,26 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to RenviaIT</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Renvia IT Ltd — E‑Waste pickup & recycling</title>
+  <script src="https://unpkg.com/alpinejs@3.x.x" defer></script>
+  <script>window.RENVIA_CONFIG = { STRIPE_PUBLISHABLE: 'pk_test_YOUR_PLACEHOLDER', FORMSPREE_ID: 'YOUR_FORMSPREE_ID' }</script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <h1>Hero Section</h1>
-        <p>Welcome to RenviaIT - Your journey to success starts here.</p>
-        <div class="trust-badges">
-            <img src="assets/images/trust-ico.svg" alt="Trust Badge">
-            <img src="assets/images/trust-insured.svg" alt="Trust Insured">
-        </div>
-        <div class="metrics">
-            <p>Metrics Section</p>
-        </div>
-        <a href="#" class="cta">Call to Action</a>
-    </header>
-    <footer>
-        <p>&copy; 2025 RenviaIT</p>
-    </footer>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+  <div id="header-target"></div>
+
+  <main class="max-w-5xl mx-auto p-6">
+    <section class="text-center py-12">
+      <h1 class="text-3xl sm:text-4xl font-extrabold">Renvia IT — high-trust e‑waste pickup & recycling</h1>
+      <p class="mt-4 text-gray-600">We make responsible disposal effortless for individuals, SMEs and public sector teams. Data-led, auditable, and low-touch.</p>
+      <div class="mt-6 flex justify-center gap-4">
+        <a class="bg-green-600 text-white px-5 py-3 rounded shadow" href="corporate-offer.html">Book a Pickup</a>
+        <a class="bg-white border border-gray-300 px-5 py-3 rounded" href="subscribe.html">Subscribe & Save</a>
+      </div>
+    </section>
+
+    <section class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
+      <div id="metric-target"></div>
+    </section>
+
+    <section class="mt-10">
+      <h2 class="text-2xl font-semibold">Why teams trust Renvia</h2>
+      <ul class="mt-4 space-y-4">
+        <li class="bg-white p-4 rounded shadow">Data-first certificates & downloadable impact reports</li>
+        <li class="bg-white p-4 rounded shadow">Transparent pricing, subscription & ad-hoc booking options</li>
+        <li class="bg-white p-4 rounded shadow">Secure handling and chain-of-custody for sensitive devices</li>
+      </ul>
+    </section>
+
+    <section class="mt-10">
+      <h3 class="text-xl font-semibold">Customer stories</h3>
+      <blockquote class="mt-4 p-4 bg-white rounded shadow">"Renvia transformed our office recycling — painless bookings and great reporting." — Olivia, Office Manager</blockquote>
+    </section>
+  </main>
+
+  <div id="footer-target"></div>
+
+  <script>
+    // Simple component loader for HTML snippets in /components
+    async function loadComponent(selector, path){
+      const el = document.querySelector(selector);
+      if(!el) return;
+      try{
+        const r = await fetch(path);
+        el.innerHTML = await r.text();
+      }catch(e){
+        el.innerHTML = '<!-- failed to load '+path+' -->';
+      }
+    }
+    loadComponent('#header-target','/components/header.html');
+    loadComponent('#footer-target','/components/footer.html');
+    // metrics box
+    loadComponent('#metric-target','/components/metric-box.html');
+  </script>
 </body>
 </html>
