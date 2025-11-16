@@ -2,10 +2,7 @@
   publish = "."
   command = ""
 
-[functions]
-  directory = "netlify/functions"
-
 [[redirects]]
-  from = "/*"
+  from = "/"
   to = "/index.html"
   status = 200

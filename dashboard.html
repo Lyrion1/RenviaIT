@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dashboard — Renvia IT</title>
+  <script src="https://unpkg.com/alpinejs@3.x.x" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+  <div id="header-target"></div>
+  <main class="max-w-5xl mx-auto p-6">
+    <div class="flex items-center justify-between">
+      <h1 class="text-2xl font-bold">Your Dashboard</h1>
+      <div>
+        <button onclick="logout()" class="text-sm text-red-600">Sign out</button>
+      </div>
+    </div>
+
+    <div id="dashboard-root" class="mt-6"></div>
+  </main>
+  <div id="footer-target"></div>
+
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/referral.js"></script>
+  <script>
+    fetch('/components/header.html').then(r=>r.text()).then(t=>document.querySelector('#header-target').innerHTML=t).catch(()=>{});
+    fetch('/components/footer.html').then(r=>r.text()).then(t=>document.querySelector('#footer-target').innerHTML=t).catch(()=>{});
+    function logout(){ localStorage.removeItem('renvia_user'); location.href='index.html'; }
+  </script>
+</body>
+</html>

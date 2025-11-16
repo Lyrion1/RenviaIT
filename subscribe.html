@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Subscribe — Renvia IT</title>
+  <script src="https://unpkg.com/alpinejs@3.x.x" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 min-h-screen">
+  <div id="header-target"></div>
+  <main class="max-w-4xl mx-auto p-6">
+    <h1 class="text-2xl font-bold">Subscription plans</h1>
+    <p class="text-sm text-gray-600">Automate regular pickups, get discounts and impact reports.</p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+      <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold">Starter</h3>
+        <p class="text-2xl font-bold">£29<span class="text-sm">/mo</span></p>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>1 scheduled pickup / mo</li><li>Basic impact report</li></ul>
+        <button class="mt-4 w-full bg-green-600 text-white py-2 rounded" onclick="subscribe('starter')">Choose Starter</button>
+      </div>
+      <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold">Business</h3>
+        <p class="text-2xl font-bold">£99<span class="text-sm">/mo</span></p>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>4 pickups / mo</li><li>Team impact dashboard</li></ul>
+        <button class="mt-4 w-full bg-green-600 text-white py-2 rounded" onclick="subscribe('business')">Choose Business</button>
+      </div>
+      <div class="bg-white p-4 rounded shadow">
+        <h3 class="font-semibold">Enterprise</h3>
+        <p class="text-2xl font-bold">£299<span class="text-sm">/mo</span></p>
+        <ul class="mt-3 text-sm text-gray-600 space-y-1"><li>Custom schedule</li><li>API & data licensing</li></ul>
+        <button class="mt-4 w-full bg-green-600 text-white py-2 rounded" onclick="subscribe('enterprise')">Contact Sales</button>
+      </div>
+    </div>
+
+  </main>
+  <div id="footer-target"></div>
+  <script>
+    fetch('/components/header.html').then(r=>r.text()).then(t=>document.querySelector('#header-target').innerHTML=t).catch(()=>{});
+    fetch('/components/footer.html').then(r=>r.text()).then(t=>document.querySelector('#footer-target').innerHTML=t).catch(()=>{});
+    function subscribe(plan){
+      // record subscription locally & redirect to thankyou
+      const subs = JSON.parse(localStorage.getItem('renvia_subs')||'{}');
+      subs[Date.now()] = { plan: plan, ts: new Date().toISOString() };
+      localStorage.setItem('renvia_subs', JSON.stringify(subs));
+      window.location.href = 'thankyou.html?type=subscribe&plan='+plan;
+    }
+  </script>
+</body>
+</html>
